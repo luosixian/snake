@@ -17,7 +17,7 @@ module.exports = {
 
     output: {
         //指定打包文件放在哪
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'docs'),
 
         //指定打包文件叫什么
         filename: "bundle.js",
