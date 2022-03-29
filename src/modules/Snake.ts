@@ -28,6 +28,9 @@ class Snake {
 
         this.moveBody();
         this.head.style.left = value + 'px';
+
+        // 检查自己撞自己
+        this.checkCollide();
     }
     set Y(value) {
         if (this.Y === value) return;
@@ -35,9 +38,20 @@ class Snake {
         if (value < 0 || value > 294) {
             throw new Error('Die');
         }
-    
+
+        // 不允许垂直方向调头
+        if (this.bodies[1] && (this.bodies[1] as HTMLElement).offsetTop === value) {
+            if (value > this.Y) { // 发生向下调头
+                value = this.Y - 10; // 使其向上走
+            } else {
+                value = this.Y + 10; // 使其向下走
+            }
+        }
         this.moveBody();
-        this.head.style.top = value + 'px';   
+        this.head.style.top = value + 'px';
+
+        // 检查自己撞自己
+        this.checkCollide();
     }
 
     // 增加身体
@@ -53,6 +67,14 @@ class Snake {
 
             (this.bodies[i] as HTMLElement).style.left = X + 'px';
             (this.bodies[i] as HTMLElement).style.top = Y + 'px';
+        }
+    }
+
+    checkCollide() {
+        for (let i = 1; i < this.bodies.length; i++) {
+            if (this.X === (this.bodies[i] as HTMLElement).offsetLeft &&
+                this.Y === (this.bodies[i] as HTMLElement).offsetTop
+            ) throw new Error('Die');
         }
     }
 }
