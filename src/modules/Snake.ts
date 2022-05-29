@@ -26,6 +26,15 @@ class Snake {
             throw new Error('Die');
         }
 
+        // 不允许水平方向调头
+        if (this.bodies[1] && (this.bodies[1] as HTMLElement).offsetLeft === value) {
+            if (value > this.X) { // 发生向右调头
+                value = this.X - 10; // 使其向左走
+            } else {
+                value = this.X + 10; // 使其向右走
+            }
+        }
+
         this.moveBody();
         this.head.style.left = value + 'px';
 
