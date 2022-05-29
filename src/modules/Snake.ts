@@ -22,7 +22,7 @@ class Snake {
     set X(value) {
         if (this.X === value) return;
 
-        if (value < 0 || value > 294) {
+        if (value < 0 || value > 290) {
             throw new Error('Die');
         }
 
@@ -44,7 +44,7 @@ class Snake {
     set Y(value) {
         if (this.Y === value) return;
 
-        if (value < 0 || value > 294) {
+        if (value < 0 || value > 290) {
             throw new Error('Die');
         }
 
